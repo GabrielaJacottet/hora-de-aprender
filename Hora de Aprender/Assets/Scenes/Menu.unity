@@ -331,7 +331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.19439963, y: 0.564}
   m_AnchorMax: {x: 0.29138392, y: 0.66989106}
-  m_AnchoredPosition: {x: 5.8977, y: 3.5399933}
+  m_AnchoredPosition: {x: 5.8976974, y: 3.5399933}
   m_SizeDelta: {x: 11.79541, y: 13.090965}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &271602455
@@ -460,7 +460,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.44500002, y: 0.23926069}
   m_AnchorMax: {x: 0.54719424, y: 0.36952135}
-  m_AnchoredPosition: {x: 1.8976998, y: 0.7400055}
+  m_AnchoredPosition: {x: 1.8976994, y: 0.7400055}
   m_SizeDelta: {x: 3.7954102, y: 3.0909653}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &450382040
@@ -511,7 +511,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game1
+          m_StringArgument: Game5
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -640,7 +640,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game1
+          m_StringArgument: Game3
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -769,7 +769,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game1
+          m_StringArgument: Game2
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -926,7 +926,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7176161, y: 0.23926069}
   m_AnchorMax: {x: 0.8211563, y: 0.36952135}
-  m_AnchoredPosition: {x: 0.39779997, y: 0.9799957}
+  m_AnchoredPosition: {x: 0.39779663, y: 0.9799957}
   m_SizeDelta: {x: 0.79541016, y: 3.0909653}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &717972039
@@ -977,7 +977,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game1
+          m_StringArgument: Game6
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -1264,7 +1264,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game1
+          m_StringArgument: Game4
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
