@@ -20,18 +20,25 @@ public class MostrarDica : MonoBehaviour
     public Image FindSiberianHusky;
     public Image FindSantaClaus;
 
-    private RaycastHit2D TocouPersonagem;
-
+    private bool Circle1 = true;
+    private bool Circle2 = false;
+    private bool Circle3 = false;
+    private Vector3 PositionCircle1;
+    private Vector3 PositionCircle2;
+    private Vector3 PositionCircle3;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        PositionCircle1 = new Vector3(-100f, -127f, 0);
+        PositionCircle2 = new Vector3(-30, -127f, 0);
+        PositionCircle3 = new Vector3(40f, -127f, 0);
+
         //adicionando os personagens na lista
         ListaCharacters.Add("TipReindeer");
-        /*ListaCharacters.Add("TipPenguin");
-        ListaCharacters.Add("TipPolarBear");
+        ListaCharacters.Add("TipPenguin");
+        /*ListaCharacters.Add("TipPolarBear");
         ListaCharacters.Add("TipSnowman");
         ListaCharacters.Add("TipSiberianHusky");
         ListaCharacters.Add("TipSantaClaus");*/
@@ -80,8 +87,11 @@ public class MostrarDica : MonoBehaviour
         }
         else if (FindCharacters == "TipPenguin")
         {
-            FindPenguin.enabled = true;
-            FindPenguin.transform.localPosition = Position;
+            if (FindPenguin != null)
+            {
+                FindPenguin.enabled = true;
+                FindPenguin.transform.localPosition = Position;
+            }
         }
         else if (FindCharacters == "TipPolarBear")
         {
@@ -120,49 +130,53 @@ public class MostrarDica : MonoBehaviour
     {
         if(Personagem == "FindReindeer")
         {
-            Position = new Vector3(-140f, -180f, 0);
-            FindReindeer.transform.localPosition = Position;
+            if (Circle1)
+            {
+                FindReindeer.transform.localPosition = PositionCircle1;
+                Circle1 = false;
+                Circle2 = true;
+            }else if (Circle2)
+            {
+                FindReindeer.transform.localPosition = PositionCircle2;
+                Circle1 = false;
+                Circle2 = false;
+                Circle3 = true;
+            }
+            else if (Circle3)
+            {
+                FindReindeer.transform.localPosition = PositionCircle3;
+                //colocar animação
+            }
+        }else if (Personagem == "FindPenguin")
+        {
+            if (Circle1)
+            {
+                FindPenguin.transform.localPosition = PositionCircle1;
+                Circle1 = false;
+                Circle2 = true;
+            }
+            else if (Circle2)
+            {
+                FindPenguin.transform.localPosition = PositionCircle2;
+                Circle1 = false;
+                Circle2 = false;
+                Circle3 = true;
+            }
+            else if (Circle3)
+            {
+                FindPenguin.transform.localPosition = PositionCircle3;
+                //colocar animação
+            }
         }
+
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.touchCount >0)
-        {
-            Touch touch = Input.GetTouch(0);
-            Vector3 touchname = Camera.main.ScreenToWorldPoint(touch.position);
-        }*/
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            Debug.Log(EventSystem.current.currentSelectedGameObject.name);
-            //TocouPersonagem = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),Vector2.zero);
-
-          // Debug.Log(TocouPersonagem);
-
-           // if (/*TocouPersonagem.collider!=null &&*/ TocouPersonagem.transform.gameObject.tag == "FindReindeer")
-           // {
-           //     Debug.Log("Show!");
-           // }
-            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit Hit;
-
-             if (Physics.Raycast(ray, out Hit, Mathf.Infinity))
-             {
-
-
-                /*var selection = Hit.transform;
-                var selectionrenderer = selection.GetComponent<RectTransform>();
-
-
-                 if (selectionrenderer.transform.name == "TipReindeer")
-                 {
-                    Debug.Log("Show!");
-                 }*/
-            // }
-        }
+        
 
     }
 }
