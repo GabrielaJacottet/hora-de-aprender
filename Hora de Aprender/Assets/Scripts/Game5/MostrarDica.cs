@@ -14,25 +14,37 @@ public class MostrarDica : MonoBehaviour
     public int SorteioPosicao;
     public Vector3 Position;
     public Image FindReindeer;
+    public Image TipReindeer;
     public Image FindPenguin;
+    public Image TipPenguin;
     public Image FindPolarBear;
+    public Image TipPolarBear;
     public Image FindSnowman;
+    public Image TipSnowman;
     public Image FindSiberianHusky;
+    public Image TipSiberianHusky;
     public Image FindSantaClaus;
+    public Image TipSantaClaus;
 
-    private bool Circle1 = true;
-    private bool Circle2 = false;
-    private bool Circle3 = false;
+
+
+    private bool Circle1;
+    private bool Circle2;
+    private bool Circle3;
     private Vector3 PositionCircle1;
     private Vector3 PositionCircle2;
     private Vector3 PositionCircle3;
-    private bool Encontrou = false;
+    private bool Encontrou;
 
     
 
     // Start is called before the first frame update
     void Start()
     {
+        IniciarVariaveis();
+
+        HabilitarCirculo1();
+
         PosicoesCirculos();
 
         AdicionarPersonagensLista();
@@ -75,7 +87,7 @@ public class MostrarDica : MonoBehaviour
 
             //Removendo o Personagem sorteado da lista, para que ele não seja desabilitado no próximo comando
             ListaCharacters.RemoveAt(SorteioDica);
-            SorteioPosicao = Random.Range(0, ListaCharacters.Count - 1);
+            SorteioPosicao = Random.Range(0, 5);
 
             PosicionarPersonagemCena(SorteioPosicao);
 
@@ -83,6 +95,15 @@ public class MostrarDica : MonoBehaviour
             Encontrou = false;
         }
 
+    }
+
+    private void IniciarVariaveis()
+    {
+        ListaCharacters.Clear();
+        Circle1 = false;
+        Circle2 = false;
+        Circle3 = false;
+        Encontrou = false;
     }
 
     private void PosicoesCirculos()
@@ -125,6 +146,7 @@ public class MostrarDica : MonoBehaviour
             if (FindReindeer != null)
             {
                 FindReindeer.enabled = true;
+                TipReindeer.enabled = true;
                 FindReindeer.transform.localPosition = Position;
             }
         }
@@ -133,6 +155,7 @@ public class MostrarDica : MonoBehaviour
             if (FindPenguin != null)
             {
                 FindPenguin.enabled = true;
+                TipPenguin.enabled = true;
                 FindPenguin.transform.localPosition = Position;
             }
         }
@@ -141,6 +164,7 @@ public class MostrarDica : MonoBehaviour
             if (FindPolarBear != null)
             {
                 FindPolarBear.enabled = true;
+                TipPolarBear.enabled = true;
                 FindPolarBear.transform.localPosition = Position;
             }
         }
@@ -149,6 +173,7 @@ public class MostrarDica : MonoBehaviour
             if (FindSnowman != null)
             {
                 FindSnowman.enabled = true;
+                TipSnowman.enabled = true;
                 FindSnowman.transform.localPosition = Position;
             }
         }
@@ -157,6 +182,7 @@ public class MostrarDica : MonoBehaviour
             if (FindSiberianHusky != null)
             {
                 FindSiberianHusky.enabled = true;
+                TipSiberianHusky.enabled = true;
                 FindSiberianHusky.transform.localPosition = Position;
             }
         }
@@ -165,10 +191,18 @@ public class MostrarDica : MonoBehaviour
             if (FindSantaClaus != null)
             {
                 FindSantaClaus.enabled = true;
+                TipSantaClaus.enabled = true;
+                
                 FindSantaClaus.transform.localPosition = Position;
             }
         }
 
+    }
+    private void HabilitarCirculo1()
+    {
+        Circle1 = true;
+        Circle2 = false;
+        Circle3 = false;
     }
 
     private void HabilitarCirculo2()
@@ -179,28 +213,30 @@ public class MostrarDica : MonoBehaviour
 
     private void HabilitarCirculo3()
     {
-        Circle1 = false;
         Circle2 = false;
         Circle3 = true;
     }
 
-    private void ColocarPersonagemCirculo(string Personagem, Image FindCharacter)
+    private void ColocarPersonagemCirculo(string Personagem, Image FindCharacter, Image TipCharacter)
     {
         if (Circle1)
         {
             FindCharacter.transform.localPosition = PositionCircle1;
+            TipCharacter.enabled = false;
             HabilitarCirculo2();
             Encontrou = true;
         }
         else if (Circle2)
         {
             FindCharacter.transform.localPosition = PositionCircle2;
+            TipCharacter.enabled = false;
             HabilitarCirculo3();
             Encontrou = true;
         }
         else if (Circle3)
         {
             FindCharacter.transform.localPosition = PositionCircle3;
+            TipCharacter.enabled = false;
         }
 
     }
@@ -209,27 +245,27 @@ public class MostrarDica : MonoBehaviour
     {
         if(Personagem == "FindReindeer")
         {
-            ColocarPersonagemCirculo(Personagem, FindReindeer);
+            ColocarPersonagemCirculo(Personagem, FindReindeer, TipReindeer);
         }
         else if (Personagem == "FindPenguin")
         {
-            ColocarPersonagemCirculo(Personagem, FindPenguin);
+            ColocarPersonagemCirculo(Personagem, FindPenguin, TipPenguin);
         }
         else if (Personagem == "FindPolarBear")
         {
-            ColocarPersonagemCirculo(Personagem, FindPolarBear);
+            ColocarPersonagemCirculo(Personagem, FindPolarBear, TipPolarBear);
         }
         else if (Personagem == "FindSnowman")
         {
-            ColocarPersonagemCirculo(Personagem, FindSnowman);
+            ColocarPersonagemCirculo(Personagem, FindSnowman, TipSnowman);
         }
         else if (Personagem == "FindSiberianHusky")
         {
-            ColocarPersonagemCirculo(Personagem, FindSiberianHusky);
+            ColocarPersonagemCirculo(Personagem, FindSiberianHusky, TipSiberianHusky);
         }
         else if (Personagem == "FindSantaClaus")
         {
-            ColocarPersonagemCirculo(Personagem, FindSantaClaus);
+            ColocarPersonagemCirculo(Personagem, FindSantaClaus, TipSantaClaus);
         }
 
 

@@ -2270,11 +2270,17 @@ MonoBehaviour:
   SorteioPosicao: 0
   Position: {x: 0, y: 0, z: 0}
   FindReindeer: {fileID: 1548664215}
+  TipReindeer: {fileID: 1495028776}
   FindPenguin: {fileID: 1526346549}
+  TipPenguin: {fileID: 313787594}
   FindPolarBear: {fileID: 186005164}
+  TipPolarBear: {fileID: 1655822933}
   FindSnowman: {fileID: 293368618}
+  TipSnowman: {fileID: 867466966}
   FindSiberianHusky: {fileID: 1179649266}
+  TipSiberianHusky: {fileID: 52103203}
   FindSantaClaus: {fileID: 90023739}
+  TipSantaClaus: {fileID: 726193996}
 --- !u!4 &1863220468
 Transform:
   m_ObjectHideFlags: 0
