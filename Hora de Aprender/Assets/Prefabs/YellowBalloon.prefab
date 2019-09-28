@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3413301616939777487}
   - component: {fileID: 216150318489960745}
   m_Layer: 5
-  m_Name: Yellow
+  m_Name: YellowBalloon
   m_TagString: Ballon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4686698107734118875}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -59,7 +59,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -119,7 +119,7 @@ Animator:
   m_GameObject: {fileID: 4686698107734118875}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f71650baf9366714b8dee6c890c12839, type: 2}
+  m_Controller: {fileID: 9100000, guid: efc25e893d4f17541841bcd043e4c0b5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

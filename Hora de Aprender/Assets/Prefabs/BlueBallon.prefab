@@ -59,7 +59,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -119,7 +119,7 @@ Animator:
   m_GameObject: {fileID: 5711764370620989096}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f71650baf9366714b8dee6c890c12839, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6f9fe9980804f194394407ece97c5da1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
