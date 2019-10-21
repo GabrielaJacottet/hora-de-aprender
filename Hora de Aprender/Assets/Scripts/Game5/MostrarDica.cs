@@ -35,8 +35,9 @@ public class MostrarDica : MonoBehaviour
     private Vector3 PositionCircle2;
     private Vector3 PositionCircle3;
     private bool Encontrou;
+    public static bool FinalizouJogo;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -104,6 +105,7 @@ public class MostrarDica : MonoBehaviour
         Circle2 = false;
         Circle3 = false;
         Encontrou = false;
+        FinalizouJogo = false;
     }
 
     private void PosicoesCirculos()
@@ -237,6 +239,7 @@ public class MostrarDica : MonoBehaviour
         {
             FindCharacter.transform.localPosition = PositionCircle3;
             TipCharacter.enabled = false;
+            FinalizouJogo = true;
         }
 
     }
