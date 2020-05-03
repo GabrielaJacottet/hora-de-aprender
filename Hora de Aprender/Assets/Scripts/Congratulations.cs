@@ -7,7 +7,7 @@ public class Congratulations : MonoBehaviour
     //velocidade do balão
     public float Velocidade = 100.0f;
     private Rigidbody2D Rigidbody;
-    public float TempoAnimacao = 0.7f;
+    public float TempoAnimacao = 0.8f;
 
 
     public AudioClip MusicClip;
@@ -17,15 +17,17 @@ public class Congratulations : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
 
-        MusicSource = this.GetComponent<AudioSource>();
-        MusicSource.clip = MusicClip;
+        if (MostrarDica.FinalizouJogo)
+        {
+            MusicSource = this.GetComponent<AudioSource>();
+            MusicSource.clip = MusicClip;
 
-        Rigidbody = this.GetComponent<Rigidbody2D>();
-        //forçando a velocidade do balão
-        Rigidbody.velocity = new Vector2(0, Velocidade);
-       
+            Rigidbody = this.GetComponent<Rigidbody2D>();
+            //forçando a velocidade do balão
+            Rigidbody.velocity = new Vector2(0, Velocidade);
+        }
+
     }
 
     // Update is called once per frame
