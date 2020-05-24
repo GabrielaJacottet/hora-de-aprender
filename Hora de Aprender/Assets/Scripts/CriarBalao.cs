@@ -22,7 +22,7 @@ public class CriarBalao : MonoBehaviour
     void Update()
     {
         //StartCoroutine(OndaBalao());
-        if (MostrarDica.FinalizouJogo)
+        if ((MostrarDica.FinalizouJogo) || MostrarObjeto.FinalizouJogo )
         {
             while (QuantidadeRepeticao < 4)
             {
