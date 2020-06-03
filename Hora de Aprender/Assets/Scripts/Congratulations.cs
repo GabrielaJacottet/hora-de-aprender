@@ -5,7 +5,7 @@ using UnityEngine;
 public class Congratulations : MonoBehaviour
 {
     //velocidade do balão
-    public float Velocidade = 100.0f;
+    public float Velocidade = 130.0f;
     private Rigidbody2D Rigidbody;
     public float TempoAnimacao = 0.8f;
 
@@ -18,8 +18,8 @@ public class Congratulations : MonoBehaviour
     void Start()
     {
 
-        if (MostrarDica.FinalizouJogo)
-        {
+        if ((MostrarDica.FinalizouJogo) || MostrarObjeto.FinalizouJogo)
+            {
             MusicSource = this.GetComponent<AudioSource>();
             MusicSource.clip = MusicClip;
 

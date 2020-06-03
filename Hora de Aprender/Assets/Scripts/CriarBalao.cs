@@ -29,41 +29,27 @@ public class CriarBalao : MonoBehaviour
                 StartCoroutine(OndaBalao());
                 QuantidadeRepeticao++;
             }
+
+            MostrarDica.FinalizouJogo = false;
+            MostrarObjeto.FinalizouJogo = false;
         }
     }
 
     private void AparecerBalao()
-    {
-       // if (MostrarDica.FinalizouJogo)
-       // {
-           // 
-            //{
-                InstanciarBaloes = new GameObject[BalaoPrefab.Length];
-                for (int i = 0; i < BalaoPrefab.Length; i++)
-                {
-                    InstanciarBaloes[i] = Instantiate(BalaoPrefab[i]) as GameObject;
-                    //GameObject Balao = Instantiate(BalaoPrefab) as GameObject;
-                    //Balao.transform.position = new Vector2(Random.Range(0, 800), 0);
-                    //Balao.transform.parent = gameObject.transform;
+    {       
+        InstanciarBaloes = new GameObject[BalaoPrefab.Length];
+        for (int i = 0; i < BalaoPrefab.Length; i++)
+        {
+            InstanciarBaloes[i] = Instantiate(BalaoPrefab[i]) as GameObject;
+            InstanciarBaloes[i].transform.position = new Vector2(Random.Range(0, 700), Random.Range(-100, 0));
+            InstanciarBaloes[i].transform.parent = gameObject.transform;
 
-                    InstanciarBaloes[i].transform.position = new Vector2(Random.Range(0, 700), Random.Range(-100, 0));
-                    InstanciarBaloes[i].transform.parent = gameObject.transform;
-
-                }
-               // QuantidadeRepeticao++;
-               
-           // }
-            //MostrarDica.FinalizouJogo = false;
-
-        //}
+        }
     }
 
     IEnumerator OndaBalao()
     {
-       
             yield return new WaitForSeconds(TempoReaparecer);
             AparecerBalao();
-           
-
     }
 }

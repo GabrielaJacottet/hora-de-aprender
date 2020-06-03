@@ -65,30 +65,32 @@ public class MostrarObjeto : MonoBehaviour
         if (Encontrou)
         {
             if (ListaObjects.Count > 0)
+            {
                 SorteioDica = Random.Range(0, ListaObjects.Count - 1); //Sorteie um personagem
-            //Pegando o nome do personagem sorteado
-            FindObjects = ListaObjects[SorteioDica];
+                //Pegando o nome do personagem sorteado
+                FindObjects = ListaObjects[SorteioDica];
 
-            //Removendo o Personagem sorteado da lista, para que ele não seja desabilitado no próximo comando
-            ListaObjects.RemoveAt(SorteioDica);
+                //Removendo o Personagem sorteado da lista, para que ele não seja desabilitado no próximo comando
+                ListaObjects.RemoveAt(SorteioDica);
 
-            HabilitandoObjeto(FindObjects);
+                HabilitandoObjeto(FindObjects);
 
-            Encontrou = false;
+                Encontrou = false;
+            }
         }
 
-        if ((MatchingBoat) && (MatchingTent) && (MatchingCarousel) && (MatchingCastle) && (MatchingFerrisWheel) && (MatchingCoaster))
+        if ((MatchingBoat) && (MatchingTent) && (MatchingCarousel) && (MatchingCastle) && (MatchingFerrisWheel) && (MatchingCoaster) && (!FinalizouJogo))
         {
             FinalizouJogo = true;
         }
 
     }
 
-    public void DragObjects(string FindObjects)
+        public void DragObjects(string FindObjects) //fazendo os objetos se mexerem, de acordo com o mouse
     {
         if (FindObjects == "ColoredBoat")
         {
-            if (!MatchingBoat)
+            if (!MatchingBoat) //se ainda não encontrou esse objeto
             {
                 ColoredBoat.transform.position = Input.mousePosition;
             }
@@ -134,16 +136,16 @@ public class MostrarObjeto : MonoBehaviour
     {
         if (FindObjects == "ColoredBoat")
         {
-            float Distance = Vector3.Distance(ColoredBoat.transform.position, ShadowBoat.transform.position);
+            float Distance = Vector3.Distance(ColoredBoat.transform.position, ShadowBoat.transform.position); //pegando a distância entre o objeto colorido e a sombra dele
             if (Distance < 50)
             {
-                ColoredBoat.transform.position = ShadowBoat.transform.position;
+                ColoredBoat.transform.position = ShadowBoat.transform.position; //colocando o objeto colorido em cima da sombra
                 MatchingBoat = true;
                 Encontrou = true;
             }
             else
             {
-                ColoredBoat.transform.localPosition = Position;
+                ColoredBoat.transform.localPosition = Position; //volta para a posição inicial
             }
         }
         else if (FindObjects == "ColoredTent")
@@ -292,62 +294,5 @@ public class MostrarObjeto : MonoBehaviour
         }
 
     }
-
-    private void ColocarPersonagemCirculo(string Personagem, Image FindCharacter, Image TipCharacter)
-    {
-       /* if (Circle1)
-        {
-            FindCharacter.transform.localPosition = PositionCircle1;
-            TipCharacter.enabled = false;
-            HabilitarCirculo2();
-            Encontrou = true;
-        }
-        else if (Circle2)
-        {
-            FindCharacter.transform.localPosition = PositionCircle2;
-            TipCharacter.enabled = false;
-            HabilitarCirculo3();
-            Encontrou = true;
-        }
-        else if (Circle3)
-        {
-            FindCharacter.transform.localPosition = PositionCircle3;
-            TipCharacter.enabled = false;
-            FinalizouJogo = true;
-        }*/
-
-    }
-    
-    public void Achou(string Personagem)
-    {
-      /*  if(Personagem == "FindReindeer")
-        {
-            ColocarPersonagemCirculo(Personagem, FindReindeer, TipReindeer);
-        }
-        else if (Personagem == "FindPenguin")
-        {
-            ColocarPersonagemCirculo(Personagem, FindPenguin, TipPenguin);
-        }
-        else if (Personagem == "FindPolarBear")
-        {
-            ColocarPersonagemCirculo(Personagem, FindPolarBear, TipPolarBear);
-        }
-        else if (Personagem == "FindSnowman")
-        {
-            ColocarPersonagemCirculo(Personagem, FindSnowman, TipSnowman);
-        }
-        else if (Personagem == "FindSiberianHusky")
-        {
-            ColocarPersonagemCirculo(Personagem, FindSiberianHusky, TipSiberianHusky);
-        }
-        else if (Personagem == "FindSantaClaus")
-        {
-            ColocarPersonagemCirculo(Personagem, FindSantaClaus, TipSantaClaus);
-        }*/
-
-
-
-    }
-
     
 }
