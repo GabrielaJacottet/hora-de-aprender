@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor.Experimental.U2D;
 
 public class MostrarDicaFazenda : MonoBehaviour
 {
 
     public static List<string> ListaCharacters = new List<string>(); //Lista de personagens
     public string FindCharacters;
+    private string EnabledCharacter;
     public int SorteioDica;
     public int SorteioPosicao;
     public Vector3 Position;
+    public Vector3 PositionY;
     public Image FindCow;
     public Image TipCow;
     public Image FindPig;
@@ -27,18 +30,30 @@ public class MostrarDicaFazenda : MonoBehaviour
 
 
 
+
+    private float LerpTime = 2;
+    private float CurrentLerpTime = 1;
     private bool Circle1;
     private bool Circle2;
     private bool Circle3;
     private bool Circle4;
     private bool Circle5;
+    private bool Up;
+    bool Mudar = false;
+    private int i = 0;
+    public Transform StarPos, EndPos;
+    private float TotalDistance;
     private Vector3 PositionCircle1;
     private Vector3 PositionCircle2;
     private Vector3 PositionCircle3;
     private Vector3 PositionCircle4;
     private Vector3 PositionCircle5;
     private bool Encontrou;
+    private bool UpdateGame = false;
     public static bool FinalizouJogo;
+
+
+    
 
 
 
@@ -65,11 +80,13 @@ public class MostrarDicaFazenda : MonoBehaviour
 
 
         //sorteando a posição que o personagem vai aparecer
-        SorteioPosicao = Random.Range(0, 5);
+        SorteioPosicao = Random.Range(0, 7);
 
         PosicionarPersonagemCena(SorteioPosicao);
 
         HabilitandoPersonagem(FindCharacters);
+
+        StartCoroutine(DicaParaEncontrar());
 
     }
 
@@ -85,12 +102,20 @@ public class MostrarDicaFazenda : MonoBehaviour
 
             //Removendo o Personagem sorteado da lista, para que ele não seja desabilitado no próximo comando
             ListaCharacters.RemoveAt(SorteioDica);
-            SorteioPosicao = Random.Range(0, 5);
+            SorteioPosicao = Random.Range(0, 7);
 
             PosicionarPersonagemCena(SorteioPosicao);
 
             HabilitandoPersonagem(FindCharacters);
             Encontrou = false;
+            i = 0;           
+        }
+        else
+        {
+            if ((!Mudar)&&(!FinalizouJogo)&&(UpdateGame))
+            {              
+                StartCoroutine(DicaParaEncontrar());
+            }
         }
 
     }
@@ -105,7 +130,353 @@ public class MostrarDicaFazenda : MonoBehaviour
         Circle5 = false;
         Encontrou = false;
         FinalizouJogo = false;
+        Up = false;
     }
+
+    IEnumerator DicaParaEncontrar()
+    {
+        UpdateGame = false;
+        yield return new WaitForSeconds(4.0f);
+        MudarPosicaoPersonagem(FindCharacters);
+    }
+
+    IEnumerator Subiu()
+    {
+        yield return new WaitForSeconds(2.0f);
+        UpdateGame = false;
+        Up = true;
+        MudarPosicaoPersonagem(FindCharacters);
+    }
+
+    IEnumerator Desceu()
+    {
+        yield return new WaitForSeconds(2.0f);
+        UpdateGame = false;
+        Up = false;
+        MudarPosicaoPersonagem(FindCharacters);
+    }
+
+    IEnumerator SortearNovaPosicao()
+    {
+        if (!FinalizouJogo)
+        {
+            yield return new WaitForSeconds(2.0f);
+
+            Mudar = false;
+            
+            i = 0;
+
+            SorteioPosicao = Random.Range(0, 7);
+            PosicionarPersonagemCena(SorteioPosicao);
+            HabilitandoPersonagem(FindCharacters);
+
+            yield return new WaitForSeconds(2.0f);
+        }
+
+    }
+
+
+
+
+    private void MudarPosicaoPersonagem(string EnabledCharacter)
+    {
+        if (EnabledCharacter == "TipCow")
+        {
+            if (FindCow != null)
+            {
+                if (i <= 5)
+                {
+
+                     if (!Up)
+                     {
+                         PositionY = Position + (Vector3.up * 15f);
+                         CurrentLerpTime += Time.deltaTime;
+                         if (CurrentLerpTime >= LerpTime)
+                         {
+                             CurrentLerpTime = LerpTime;
+                         }
+
+                         float Perc = CurrentLerpTime / LerpTime;
+                         FindCow.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                         StartCoroutine(Subiu());
+                         i++;
+                     }
+                     else
+                     {
+                         PositionY = Position + (Vector3.down * 15f);
+                         CurrentLerpTime += Time.deltaTime;
+                         if (CurrentLerpTime >= LerpTime)
+                         {
+                             CurrentLerpTime = LerpTime;
+                         }
+
+                         float Perc = CurrentLerpTime / LerpTime;
+                         FindCow.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                         StartCoroutine(Desceu());
+                         i++;
+                     }
+                }
+                 else
+                 {
+                     if (!Mudar)
+                     {
+                         Mudar = true;
+                         UpdateGame = true;
+                         StartCoroutine(SortearNovaPosicao());
+                     }
+                 }
+
+
+            }
+        }
+        else if (EnabledCharacter == "TipPig")
+        {
+            if (FindPig != null)
+            {
+                if (i <= 5)
+                {
+                    if (!Up)
+                    {
+                        PositionY = Position + (Vector3.up * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindPig.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Subiu());
+                        i++;
+                    }
+                    else
+                    {
+                        PositionY = Position + (Vector3.down * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindPig.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Desceu());
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (!Mudar)
+                    {
+                        Mudar = true;
+                        UpdateGame = true;
+                        StartCoroutine(SortearNovaPosicao());
+                    }
+                }
+            }
+        }
+        else if (EnabledCharacter == "TipChicken")
+        {
+            if (FindChicken != null)
+            {
+                if (i <= 5)
+                {
+                    if (!Up)
+                    {
+                        PositionY = Position + (Vector3.up * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindChicken.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Subiu());
+                        i++;
+                    }
+                    else
+                    {
+                        PositionY = Position + (Vector3.down * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindChicken.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Desceu());
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (!Mudar)
+                    {
+                        Mudar = true;
+                        UpdateGame = true;
+                        StartCoroutine(SortearNovaPosicao());
+                    }
+                }
+            }
+        }
+        else if (EnabledCharacter == "TipSheep")
+        {
+            if (FindSheep != null)
+            {
+                if (i <= 5)
+                {
+                    if (!Up)
+                    {
+                        PositionY = Position + (Vector3.up * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindSheep.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Subiu());
+                        i++;
+                    }
+                    else
+                    {
+                        PositionY = Position + (Vector3.down * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindSheep.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Desceu());
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (!Mudar)
+                    {
+                        Mudar = true;
+                        UpdateGame = true;
+                        StartCoroutine(SortearNovaPosicao());
+                    }
+                }
+            }
+        }
+        else if (EnabledCharacter == "TipDuck")
+        {
+            if (FindDuck != null)
+            {
+                if (i <= 5)
+                {
+                    if (!Up)
+                    {
+                        PositionY = Position + (Vector3.up * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindDuck.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Subiu());
+                        i++;
+                    }
+                    else
+                    {
+                        PositionY = Position + (Vector3.down * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindDuck.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Desceu());
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (!Mudar)
+                    {
+                        Mudar = true;
+                        UpdateGame = true;
+                        StartCoroutine(SortearNovaPosicao());
+                    }
+                }
+            }
+        }
+        else if (EnabledCharacter == "TipHorse")
+        {
+            if (FindHorse != null)
+            {
+                if (i <= 5)
+                {
+                    if (!Up)
+                    {
+                        PositionY = Position + (Vector3.up * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindHorse.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Subiu());
+                        i++;
+                    }
+                    else
+                    {
+                        PositionY = Position + (Vector3.down * 15f);
+                        CurrentLerpTime += Time.deltaTime;
+                        if (CurrentLerpTime >= LerpTime)
+                        {
+                            CurrentLerpTime = LerpTime;
+                        }
+
+                        float Perc = CurrentLerpTime / LerpTime;
+                        FindHorse.transform.localPosition = Vector3.Lerp(Position, PositionY, Perc);
+
+                        StartCoroutine(Desceu());
+                        i++;
+                    }
+                }
+                else
+                {
+                    if (!Mudar)
+                    {
+                        Mudar = true;
+                        UpdateGame = true;
+                        StartCoroutine(SortearNovaPosicao());
+                    }
+                }
+            }
+        }
+    }
+   
+
+   
+
+
 
     private void PosicoesCirculos()
     {
@@ -129,23 +500,21 @@ public class MostrarDicaFazenda : MonoBehaviour
     private void PosicionarPersonagemCena(int SorteioPos)
     {
         if (SorteioPos == 0)
-            Position = new Vector3(220f, -70f, 0);//trenó
+            Position = new Vector3(275f, 80f, 0);//atrás da árvore
         else if (SorteioPos == 1)
-            Position = new Vector3(255f, 70f, 0);//igreja
+            Position = new Vector3(-9f, -117f, 0);//trator
         else if (SorteioPos == 2)
-            Position = new Vector3(-135f, 20f, 0);//iglu
+            Position = new Vector3(-110f, -68f, 0);//atrás da casa
         else if (SorteioPos == 3)
-            Position = new Vector3(15f, 90f, 0);//atrás casa
+            Position = new Vector3(-334f, -94f, 0);//atrás do moinho
         else if (SorteioPos == 4)
-            Position = new Vector3(-300f, 25f, 0);//pinheiro
+            Position = new Vector3(-351f, -184f, 0);//atrás da carroça
         else if (SorteioPos == 5)
-            Position = new Vector3(-120f, 85f, 0);//frente casa
+            Position = new Vector3(-125f, -184f, 0);//atrás da palha
         else if (SorteioPos == 6)
-            Position = new Vector3(-120f, 85f, 0);//frente casa
+            Position = new Vector3(190f, -30f, 0);//atrás do espantalho
         else if (SorteioPos == 7)
-            Position = new Vector3(-120f, 85f, 0);//frente casa
-        else if (SorteioPos == 8)
-            Position = new Vector3(-120f, 85f, 0);//frente casa
+            Position = new Vector3(175f, -167f, 0);//horta
     }
 
     private void HabilitandoPersonagem(string FindCharacters)
@@ -157,6 +526,8 @@ public class MostrarDicaFazenda : MonoBehaviour
                 FindCow.enabled = true;
                 TipCow.enabled = true;
                 FindCow.transform.localPosition = Position;
+                EnabledCharacter = "FindCow";
+                TotalDistance = Vector3.Distance(Position, Position +(Vector3.up * 15f));
             }
         }
         else if (FindCharacters == "TipPig")
@@ -166,6 +537,7 @@ public class MostrarDicaFazenda : MonoBehaviour
                 FindPig.enabled = true;
                 TipPig.enabled = true;
                 FindPig.transform.localPosition = Position;
+                EnabledCharacter = "FindPig";
             }
         }
         else if (FindCharacters == "TipChicken")
@@ -175,6 +547,7 @@ public class MostrarDicaFazenda : MonoBehaviour
                 FindChicken.enabled = true;
                 TipChicken.enabled = true;
                 FindChicken.transform.localPosition = Position;
+                EnabledCharacter = "FindChicken";
             }
         }
         else if (FindCharacters == "TipSheep")
@@ -184,6 +557,7 @@ public class MostrarDicaFazenda : MonoBehaviour
                 FindSheep.enabled = true;
                 TipSheep.enabled = true;
                 FindSheep.transform.localPosition = Position;
+                EnabledCharacter = "FindSheep";
             }
         }
         else if (FindCharacters == "TipDuck")
@@ -193,6 +567,7 @@ public class MostrarDicaFazenda : MonoBehaviour
                 FindDuck.enabled = true;
                 TipDuck.enabled = true;
                 FindDuck.transform.localPosition = Position;
+                EnabledCharacter = "FindDuck";
             }
         }
         else if (FindCharacters == "TipHorse")
@@ -202,6 +577,7 @@ public class MostrarDicaFazenda : MonoBehaviour
                 FindHorse.enabled = true;
                 TipHorse.enabled = true;
                 FindHorse.transform.localPosition = Position;
+                EnabledCharacter = "FindHorse";
             }
         }
 
